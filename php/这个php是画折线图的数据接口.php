@@ -55,7 +55,13 @@ $fakeDate = [];
 while (true){
     $left_time = date('Y-m-d H:i:s',$start_timestamp);
     $right_time = date('Y-m-d H:i:s',$start_timestamp+$n); //加三分钟
-    $sql = "
+    $sql = 
+	
+	"(select distinct mac from 00f92b8c_detail where tc in ('Y' , 'N') and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8c_detail where ds='Y' and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8d_detail where tc in ('Y' , 'N') and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8d_detail where ds='Y' and time between '{$left_time}' and '2018-08-23 18:59') UNION (select distinct mac from 00f92b8e_detail where tc in ('Y' , 'N') and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8e_detail where ds='Y' and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8f_detail where tc in ('Y' , 'N') and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8f_detail where ds='Y' and time between '{$left_time}' and '{$right_time}')";
+
+	
+	/*便于人理解的sql语句
+	"
 		(select distinct mac from 00f92b8c_detail where tc in ('Y' , 'N') and time between '{$left_time}' and '{$right_time}')
         UNION
         (select distinct mac from 00f92b8c_detail where ds='Y' and time between '{$left_time}' and '{$right_time}') 
@@ -70,7 +76,7 @@ while (true){
 		
 		(select distinct mac from 00f92b8e_detail where tc in ('Y' , 'N') and time between '{$left_time}' and '{$right_time}')
         UNION
-        select distinct mac from 00f92b8e_detail where ds='Y' and time between '{$left_time}' and '{$right_time}')
+        (select distinct mac from 00f92b8e_detail where ds='Y' and time between '{$left_time}' and '{$right_time}')
 		
 		UNION
 		
@@ -78,9 +84,13 @@ while (true){
         UNION
         (select distinct mac from 00f92b8f_detail where ds='Y' and time between '{$left_time}' and '{$right_time}')
 		";
+		
+		*/
+		
+		
     $arr=$mysql->getAll($sql);
 
-    $defaultDate[] = date('h:i',$start_timestamp);
+    $defaultDate[] = date('H:i',$start_timestamp);
     $fakeDate[]= [
         'y'=>count($arr)
     ];

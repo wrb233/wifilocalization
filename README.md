@@ -6,17 +6,17 @@
 
 ## Preview
 
-![Preview](C:\Users\wl\Desktop\codes\image\preview.png)
+![Preview](https://github.com/wrb233/wifilocalization/blob/master/image/preview.png?raw=true)
 
 
 
 ## Status
 
-![plain](C:\Users\wl\Desktop\codes\image\plain.jpg)
+![plain](https://github.com/wrb233/wifilocalization/blob/master/image/plain.jpg?raw=true)
 
 ## Download and Installation（系统框架图）
 
-![deposit](C:\Users\wl\Desktop\codes\image\deposit.png)
+![deposit](https://github.com/wrb233/wifilocalization/blob/master/image/deposit.png?raw=true)
 
 ## Usage
 
@@ -56,9 +56,9 @@ graph LR
 
 整个被动定位系统最重要的无疑是WiFi探针采集到的数据，接下来，我会把四个探针写入8张表的数据做详细介绍，我以1号探针举例子，也就是介绍两张表，另外3个探针除了表名不一样外，表的字段完全一致。
 
-![mysql](C:\Users\wl\Desktop\codes\image\mysql.png)
+![mysql](https://github.com/wrb233/wifilocalization/blob/master/image/mysql.png?raw=true)
 
-![phpadmin](C:\Users\wl\Desktop\codes\image\phpadmin.png)
+![phpadmin](https://github.com/wrb233/wifilocalization/blob/master/image/phpadmin.png?raw=true)
 
 4个探针未通电之前，全是空表，不插入数据。
 
