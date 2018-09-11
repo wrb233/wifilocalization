@@ -8,7 +8,6 @@ class Mysql{
     public $db_pass;
     public $db_charset;
     public $db_name;
-
     public function __construct($db_host,$db_user,$db_pass,$db_charset,$db_name){
         $this->db_host=$db_host;
         $this->db_user=$db_user;
@@ -17,13 +16,11 @@ class Mysql{
         $this->db_name=$db_name;
         $this->connect();
     }
-
     public function connect(){
         @mysql_connect($this->db_host,$this->db_user,$this->db_pass);
         mysql_set_charset($this->db_charset);
         mysql_select_db($this->db_name);
     }
-
     public function getAll($sql){
         $res =mysql_query($sql);
 		
@@ -33,16 +30,10 @@ class Mysql{
         }
         return $rows;
     }
-
     public function __destruct(){
         mysql_close();
     }
-
 }
-
-
-
-
 $mysql=new Mysql('127.0.0.1','root','123','utf8','1');
 // 获取当天的 0 点
 $start_timestamp = strtotime(date('Y-m-d',time()).'00:00:00');
@@ -57,8 +48,10 @@ while (true){
     $right_time = date('Y-m-d H:i:s',$start_timestamp+$n); //加三分钟
     $sql = 
 	
-	"(select distinct mac from 00f92b8c_detail where tc in ('Y' , 'N') and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8c_detail where ds='Y' and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8d_detail where tc in ('Y' , 'N') and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8d_detail where ds='Y' and time between '{$left_time}' and '2018-08-23 18:59') UNION (select distinct mac from 00f92b8e_detail where tc in ('Y' , 'N') and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8e_detail where ds='Y' and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8f_detail where tc in ('Y' , 'N') and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8f_detail where ds='Y' and time between '{$left_time}' and '{$right_time}')";
-
+	"(select distinct mac from 00f92b8c_detail where tc in ('Y' , 'N') and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8c_detail where ds='Y' and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8d_detail where tc in ('Y' , 'N') and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8d_detail where ds='Y' and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8e_detail where tc in ('Y' , 'N') and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8e_detail where ds='Y' and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8f_detail where tc in ('Y' , 'N') and time between '{$left_time}' and '{$right_time}') UNION (select distinct mac from 00f92b8f_detail where ds='Y' and time between '{$left_time}' and '{$right_time}')";
+	
+	
+	
 	
 	/*便于人理解的sql语句
 	"
@@ -86,10 +79,9 @@ while (true){
 		";
 		
 		*/
-		
+	
 		
     $arr=$mysql->getAll($sql);
-
     $defaultDate[] = date('H:i',$start_timestamp);
     $fakeDate[]= [
         'y'=>count($arr)
@@ -100,7 +92,18 @@ while (true){
         $start_timestamp+= $n;
     }
 }
+
+/*
 echo  json_encode([
-    "defaultDate"=>$defaultDate,
-    "fakeDate"=>$fakeDate
+    //"defaultDate"=>$defaultDate,
+    //"fakeDate"=>$fakeDate
+	$fakeDate
 ]);
+
+*/
+
+echo  json_encode(
+	$fakeDate
+);
+
+//var_dump($fakeDate);
