@@ -8,6 +8,7 @@ class Mysql{
     public $db_pass;
     public $db_charset;
     public $db_name;
+	public $connect;
     public function __construct($db_host,$db_user,$db_pass,$db_charset,$db_name){
         $this->db_host=$db_host;
         $this->db_user=$db_user;
@@ -17,21 +18,21 @@ class Mysql{
         $this->connect();
     }
     public function connect(){
-        @mysql_connect($this->db_host,$this->db_user,$this->db_pass);
-        mysql_set_charset($this->db_charset);
-        mysql_select_db($this->db_name);
+        $this->connect = @mysqli_connect($this->db_host,$this->db_user,$this->db_pass);
+        mysqli_set_charset($this->connect,$this->db_charset);
+        mysqli_select_db($this->connect,$this->db_name);
     }
     public function getAll($sql){
-        $res =mysql_query($sql);
+        $res =mysqli_query($this->connect,$sql);
 		
         $rows=[];
-        while(!is_bool($res)&&$row=mysql_fetch_assoc($res)){
+        while(!is_bool($res)&&$row=mysqli_fetch_assoc($res)){
             $rows[]=$row;
         }
         return $rows;
     }
     public function __destruct(){
-        mysql_close();
+        mysqli_close($this->connect);
     }
 }
 $mysql=new Mysql('127.0.0.1','root','123','utf8','1');
