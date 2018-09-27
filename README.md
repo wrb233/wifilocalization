@@ -44,7 +44,7 @@ graph LR
     
 ```
 
-​                                                                                   <center>系统功能模块图</center>
+<p>                                                                                <center>系统功能模块图</center></p>
 
 
 
